@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('frontApp')
-.controller('MainCtrl', function ($scope, $location, googleMap) {
+.controller('MainCtrl', function ($scope, $location, googleMap, $q, $rootScope) {
 
   $scope.source = "Tokyo Station";
   $scope.destination = "Shibuya";
@@ -11,6 +11,27 @@ angular.module('frontApp')
       googleMap.setDestination($scope.destination);
       $location.path('/map')
   };
+
+
+  /*
+    function async_geocoder(address){
+        var deferred = $q.defer();
+        var geo = new google.maps.Geocoder();
+        geo.geocode({address: address}, function(results,status){
+            if (status == google.maps.GeocoderStatus.OK){
+                deferred.resolve(results[0].geometry.location);
+                $rootScope.$digest();
+            }else{
+                deferred.reject();
+                $rootScope.$digest();
+            }   
+        });   
+        return deferred.promise;
+    }  
+    
+    async_geocoder('tokyo').then(function(a){ console.log(a)});
+    */
+
   
 })
 .controller('MapCtrl', function ($scope, googleMap) {
@@ -36,5 +57,9 @@ angular.module('frontApp')
     */
    googleMap.init();
    googleMap.getRoute();
+
+   $scope.addMarker = function(){
+       googleMap.addMarker($scope.inputText);
+   };
   
 });

@@ -9,6 +9,10 @@ See transition : <a href="{{ transitURL }}" TARGET="_blank">click</a>
     <div id="directionsPanel"></div>
   </div>
   <div class="col-md-6">
+    <input type="text" class="form-control" placeholder="Text input" ng-model="inputText">
+    <br>
+    <button type="button" class="btn btn-success" ng-click="addMarker()">submit</button>
+    {{ inputText }}
   </div>
 </div>
 
